@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       body{
+           background-color: coral;
+       }
+       .box{
+           width: 500px;
+           height: 800px;
+           background-color: aliceblue;
+           /* text-align: center; */
+           margin: auto;
+           margin-top: 120px;
+           border-radius: 15px;
+           overflow: hidden;
+           position: relative;
+       }
+       .tu{
+          margin-left: 80px;
+          margin-top: 50px;
+           width: 180px;
+           height: 210px;
+       }
+       .tu img{
+           width: 100%;
+           height: 100%;
+       }
+       .a{
+           width: 120px;
+           height: 60px;
+           background-color: red;
+           position: absolute;
+           top: 130px;
+           right:60px;
+           color: aliceblue;
+           text-align: center;
+           line-height: 60px;
+
+       }
+       .b{
+           color: black;
+           font-weight: 700;
+           font-size: 28px;
+           text-align: center;
+           margin-top: 30px;
+           margin-bottom: 20px;
+       }
+       b{
+           font-weight: 500;
+       }
+      li{
+          position: relative;
+          list-style: none;
+      }
+      a{
+         position: absolute;
+         right: 100px;
+         top: 0;
+      }
+      .qk{
+        text-align: center;
+      }
+    </style>
+</head>
+<body>
+    <div class="box">
+         <div class="box1">
+             <div class="tu">
+                 <img src="./C86AC59B-F30C-4DD2-83E4-04D59D520A56.png" alt="">
+             </div>
+             <div class="a">To Do List</div>
+         </div>
+         <div class="b">~ Today I need to ~</div>
+         <input type="text" style="width: 250px;margin-left: 80px;">
+         <button>submit</button>
+         <ul>
+            
+         </ul>
+         <div class="qk">清空</div>
+    </div>
+</body>
+</html>
+<script>
+    //获取元素
+    var txt=document.querySelector("input");
+    var tian=document.querySelector("button");
+    var ul=document.querySelector("ul");
+   var qk=document.querySelector(".qk")
+    //键盘事件
+    txt.onkeyup=function(e){
+        if(e.keyCode===13){
+            if(txt.value!==""){
+               var li=document.createElement("li");
+               li.innerHTML=`
+               <input type="checkbox"  class="wan" style="margin-left: 40px;">
+              <b>${txt.value}</b>
+             <a class="del">X</a>
+               `
+               ul.appendChild(li)
+               txt.value=""
+            }
+        }
+    //按钮添加
+    tian.onclick=function(){
+            if(txt.value!==""){
+               var li=document.createElement("li");
+               li.innerHTML=`
+               <input type="checkbox" class="wan"  style="margin-left: 40px;">
+              <b>${txt.value}</b>
+             <a class="del">X</a>
+               `
+               ul.appendChild(li)
+               txt.value=""
+            }
+        }
+    }
+    //删除
+       ul.addEventListener("click",function(e){
+            //判断是删除按钮执行功能
+            if(e.target.className=="del"){
+                ul.removeChild(e.target.parentNode)
+            }
+        })
+    // 清空
+     qk.onclick=function(){
+         ul.innerHTML=''
+     }
+        ul.addEventListener("click",function(e){
+            //判断是完成按钮执行功能
+            if(e.target.className=="wan"){
+                e.target.parentNode.style.textDecoration="line-through";
+            }
+        })
+</script>
