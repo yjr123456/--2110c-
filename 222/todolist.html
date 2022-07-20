@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>todolist</title>
     <style>
        body{
-           background-color: coral;
+           background-color: lightpink;
+           font-family: "宋体";
        }
        .box{
-           width: 500px;
-           height: 800px;
+           width: 600px;
+           /* height: 800px; */
            background-color: aliceblue;
            /* text-align: center; */
            margin: auto;
@@ -19,9 +20,10 @@
            border-radius: 15px;
            overflow: hidden;
            position: relative;
+           padding-bottom: 50px;
        }
        .tu{
-          margin-left: 80px;
+          margin-left: 130px;
           margin-top: 50px;
            width: 180px;
            height: 210px;
@@ -31,12 +33,12 @@
            height: 100%;
        }
        .a{
-           width: 120px;
+           width: 140px;
            height: 60px;
-           background-color: red;
+           background-color: coral;
            position: absolute;
            top: 130px;
-           right:60px;
+           right:120px;
            color: aliceblue;
            text-align: center;
            line-height: 60px;
@@ -54,16 +56,27 @@
            font-weight: 500;
        }
       li{
+          margin: 10px 0;
           position: relative;
           list-style: none;
       }
       a{
          position: absolute;
-         right: 100px;
+         right: 80px;
          top: 0;
       }
-      .qk{
-        text-align: center;
+     
+      .aa{
+          border: 0;
+          border-bottom: 2px dashed coral;
+          outline: 0;
+          background-color: aliceblue;
+      }
+      p{
+          text-align: center;
+      }
+      span{
+          margin: 0 10px;
       }
     </style>
 </head>
@@ -71,17 +84,19 @@
     <div class="box">
          <div class="box1">
              <div class="tu">
-                 <img src="./C86AC59B-F30C-4DD2-83E4-04D59D520A56.png" alt="">
+                 <img src="./note.75134fb0.svg" alt="">
              </div>
              <div class="a">To Do List</div>
          </div>
          <div class="b">~ Today I need to ~</div>
-         <input type="text" style="width: 250px;margin-left: 80px;">
+         <input type="text" class="aa" placeholder="Add new todo" style="width: 350px;margin-left: 80px;margin-right: 25px;">
          <button>submit</button>
          <ul>
             
          </ul>
-         <div class="qk">清空</div>
+         <p><span class="a1">item left 0</span><span class="a2">All</span><span class="a3">Ac</span><span
+            class="a4">com</span><span class="a5">clear</span></p>
+
     </div>
 </body>
 </html>
@@ -90,50 +105,235 @@
     var txt=document.querySelector("input");
     var tian=document.querySelector("button");
     var ul=document.querySelector("ul");
-   var qk=document.querySelector(".qk")
+   var body = document.querySelector('body')
+    var a1 = document.querySelector('.a1')
+    var a2 = document.querySelector('.a2')
+    var a3 = document.querySelector('.a3')
+    var a4 = document.querySelector('.a4')
+    var a5 = document.querySelector('.a5')
+    var b = 0;
+    var a = 0;
+    var c = 0;
     //键盘事件
     txt.onkeyup=function(e){
         if(e.keyCode===13){
             if(txt.value!==""){
                var li=document.createElement("li");
-               li.innerHTML=`
-               <input type="checkbox"  class="wan" style="margin-left: 40px;">
-              <b>${txt.value}</b>
-             <a class="del">X</a>
-               `
-               ul.appendChild(li)
-               txt.value=""
+               li.innerHTML = `<input type="checkbox" class="ipt1"><span>${txt.value}</span><span class="aa" bb='${a++}'>x</span>`
+            console.log(li);
+            var li1 = document.querySelectorAll('li')
+            a1.innerHTML = a + 'item left'
+            ul.insertBefore(li, li1[0])
+            txt.value = ''
+            var s2 = document.querySelectorAll('.aa')
+            var ipt1 = document.querySelectorAll('.ipt1')
+            for (var i = 0; i < s2.length; i++) {
+                s2[i].onclick = function () {
+                    ul.removeChild(this.parentNode)
+                    console.log(this);
+                    a--
+                    a1.innerHTML = a + 'item left'
+                }
+            }
+            for (var i = 0; i < ipt1.length; i++) {
+                var bb = 0
+                ipt1[i].setAttribute('ss', 1)
+                ipt1[i].onclick = function () {
+                    console.log(this);
+                    if (this.getAttribute('ss') == 1) {
+                        this.setAttribute('ss', 2)
+                        this.parentNode.style.background = "red"
+                        this.parentNode.style.color = "#fff"
+                        this.parentNode.style.textDecoration = 'line-through'
+                    } else {
+                        this.setAttribute('ss', 1)
+                        this.parentNode.style.background = ""
+                        this.parentNode.style.color = "#000"
+                        this.parentNode.style.textDecoration = ''
+                    }
+                    for (var j = 0; j < ipt1.length; j++) {
+                        if (ipt1[j].getAttribute('ss') == 2) {
+                            // console.log(ipt1[j].getAttribute('ss'));
+                            bb++
+                            b = bb
+                        } else {
+                            c++
+                        }
+                    }
+                    if (b > 0) {
+                        a3.style.display = 'inline-block'
+                    }
+                    console.log(b);
+                    var dd = 0;
+                    var dsj = setInterval(() => {
+                        dd += 20;
+                        this.parentNode.style.transform = 'rotateX(' + dd + 'deg)';
+                        if (dd >= 360) {
+                            clearInterval(dsj)
+                        }
+                    }, 100)
+                }
+            }
+
+            if (b > 0) {
+                a3.style.display = 'inline-block'
+            }
+            a2.onclick = function () {
+                for (var i = 0; i < li1.length; i++) {
+                    li1[i].style.display = "block"
+                }
+            }
+            a3.onclick = function () {
+                for (var i = 0; i < ipt1.length; i++) {
+                    if (ipt1[i].getAttribute('ss') == 2) {
+                        ipt1[i].parentNode.style.display = 'none'
+                    } else {
+                        ipt1[i].parentNode.style.display = 'block'
+                    }
+                }
+            }
+            a4.onclick = function () {
+                for (var i = 0; i < ipt1.length; i++) {
+                    if (ipt1[i].getAttribute('ss') == 1) {
+                        ipt1[i].parentNode.style.display = 'none'
+                    } else {
+                        ipt1[i].parentNode.style.display = 'block'
+                    }
+
+                }
+            }
+            a5.onclick = function () {
+                var xx = 0;
+                for (var i = 0; i < ipt1.length; i++) {
+                    if (ipt1[i].getAttribute('ss') == 2) {
+                        ul.removeChild(ipt1[i].parentNode)
+                    } else {
+                        ipt1[i].parentNode.style.display = 'block'
+                        xx++
+                    }
+                }
+                a1.innerHTML = xx + 'item left'
+            }
             }
         }
+
+        
     //按钮添加
     tian.onclick=function(){
             if(txt.value!==""){
                var li=document.createElement("li");
-               li.innerHTML=`
-               <input type="checkbox" class="wan"  style="margin-left: 40px;">
-              <b>${txt.value}</b>
-             <a class="del">X</a>
-               `
-               ul.appendChild(li)
-               txt.value=""
+               li.innerHTML = `<input type="checkbox" class="ipt1"><span>${txt.value}</span><span class="aa" bb='${a++}'>X</span>`
+            console.log(li);
+            var li1 = document.querySelectorAll('li')
+            a1.innerHTML = a + 'item left'
+            ul.insertBefore(li, li1[0])
+            txt.value = ''
+            var s2 = document.querySelectorAll('.aa')
+            var ipt1 = document.querySelectorAll('.ipt1')
+            for (var i = 0; i < s2.length; i++) {
+                s2[i].onclick = function () {
+                    ul.removeChild(this.parentNode)
+                    console.log(this);
+                    a--
+                    a1.innerHTML = a + 'item left'
+                }
+            }
+            for (var i = 0; i < ipt1.length; i++) {
+                var bb = 0
+                ipt1[i].setAttribute('ss', 1)
+                ipt1[i].onclick = function () {
+                    console.log(this);
+                    if (this.getAttribute('ss') == 1) {
+                        this.setAttribute('ss', 2)
+                        this.parentNode.style.background = "red"
+                        this.parentNode.style.color = "#fff"
+                        this.parentNode.style.textDecoration = 'line-through'
+                    } else {
+                        this.setAttribute('ss', 1)
+                        this.parentNode.style.background = ""
+                        this.parentNode.style.color = "#000"
+                        this.parentNode.style.textDecoration = ''
+                    }
+                    for (var j = 0; j < ipt1.length; j++) {
+                        if (ipt1[j].getAttribute('ss') == 2) {
+                            // console.log(ipt1[j].getAttribute('ss'));
+                            bb++
+                            b = bb
+                        } else {
+                            c++
+                        }
+                    }
+                    if (b > 0) {
+                        a3.style.display = 'inline-block'
+                    }
+                    console.log(b);
+                    var dd = 0;
+                    var dsj = setInterval(() => {
+                        dd += 20;
+                        this.parentNode.style.transform = 'rotateX(' + dd + 'deg)';
+                        if (dd >= 360) {
+                            clearInterval(dsj)
+                        }
+                    }, 100)
+                }
+            }
+
+            if (b > 0) {
+                a3.style.display = 'inline-block'
+            }
+            a2.onclick = function () {
+                for (var i = 0; i < li1.length; i++) {
+                    li1[i].style.display = "block"
+                }
+            }
+            a3.onclick = function () {
+                for (var i = 0; i < ipt1.length; i++) {
+                    if (ipt1[i].getAttribute('ss') == 2) {
+                        ipt1[i].parentNode.style.display = 'none'
+                    } else {
+                        ipt1[i].parentNode.style.display = 'block'
+                    }
+                }
+            }
+            a4.onclick = function () {
+                for (var i = 0; i < ipt1.length; i++) {
+                    if (ipt1[i].getAttribute('ss') == 1) {
+                        ipt1[i].parentNode.style.display = 'none'
+                    } else {
+                        ipt1[i].parentNode.style.display = 'block'
+                    }
+
+                }
+            }
+            a5.onclick = function () {
+                var xx = 0;
+                for (var i = 0; i < ipt1.length; i++) {
+                    if (ipt1[i].getAttribute('ss') == 2) {
+                        ul.removeChild(ipt1[i].parentNode)
+                    } else {
+                        ipt1[i].parentNode.style.display = 'block'
+                        xx++
+                    }
+                }
+                a1.innerHTML = xx + 'item left'
+            }
+              
             }
         }
     }
-    //删除
-       ul.addEventListener("click",function(e){
-            //判断是删除按钮执行功能
-            if(e.target.className=="del"){
-                ul.removeChild(e.target.parentNode)
-            }
-        })
-    // 清空
-     qk.onclick=function(){
-         ul.innerHTML=''
-     }
-        ul.addEventListener("click",function(e){
-            //判断是完成按钮执行功能
-            if(e.target.className=="wan"){
-                e.target.parentNode.style.textDecoration="line-through";
-            }
-        })
+    // //删除
+    //    ul.addEventListener("click",function(e){
+    //         //判断是删除按钮执行功能
+    //         if(e.target.className=="del"){
+    //             ul.removeChild(e.target.parentNode)
+    //         }
+    //     })
+    
+    //  //加下划线
+    //     ul.addEventListener("click",function(e){
+    //         //判断是完成按钮执行功能
+    //         if(e.target.className=="wan"){
+    //             e.target.parentNode.style.textDecoration="line-through";
+    //         }
+    //     })
 </script>
