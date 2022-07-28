@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品</title>
+</head>
+<body>
+    <input type="text" onkeyup="sou(this)">
+    <br><br>
+    <table border="1" cellspacing="0">
+        <thead>
+            <tr>
+                <th>
+                    编号
+                    <!-- this就是当前的dom元素 -->
+                    <button onclick="dao(this)">倒序</button>
+                </th>
+                <th>商品名称</th>
+                <th>
+                    价格
+                    <button onclick="zheng(this)">正序</button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+    <p>每页
+        <input type="text" class="tiao" value="10" onkeyup="xian(this)">条，
+        共<span></span>条
+    </p>
+    <span>
+        <button></button>
+    </span>
+</body>
+<script src="./sp.js"></script>
+</html>
+<style>
+    .tiao{
+        width: 30px;
+    }
+
+</style>

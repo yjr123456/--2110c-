@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./todolist.css">
+</head>
+<body>
+    <div class="box">
+        <div class="tou">
+            <div class="a">
+                <img src="./note.75134fb0.svg" alt="">
+            </div>
+            <div class="b">我是todo</div>
+        </div>
+        <div class="zj">
+            <h2>~今天要做的事情</h2>
+            <input type="text" class="ne" id='inputValue' onkeydown="addTodolist(event)" placeholder="请输入内容">
+            <button class="tian" onclick="addTodolist()">添加</button>
+        </div>
+        <div class="nei">
+          <ul>
+
+          </ul>
+        </div>
+        <div class="wei">
+            <span class="a1" id="www">无事项</span>
+            <span class="a2 clickButton" id="all"  onclick="suoyou()">查看所有</span>
+            <span class="a3" id="deng" onclick="dengdai()">待完成</span>
+            <span class="a4" id="wan" onclick="wancheng()">已完成</span>
+            <span class="a5" id="clear" onclick="clearAll()">清空所有</span>
+        </div>
+    </div>
+
+</body>
+<script src="./todolist.js"></script>
+</html>
